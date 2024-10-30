@@ -13,10 +13,11 @@ struct CustomTabBar: View {
     @Binding var activeTab: Tab
     @Namespace private var animation
     @State private var tabLocation: CGRect = .zero
+    @State private var viewModel = Authentication()
     
     var body: some View {
-//        let status = activeTab == .home || activeTab == .settings
-        let status = activeTab == .home
+        let status = activeTab == .home || activeTab == .settings
+//        let status = activeTab == .home
 
         HStack(spacing: !status ? 0 : 12) {
             HStack(spacing: 0) {
@@ -78,7 +79,7 @@ struct CustomTabBar: View {
                 if activeTab == .home {
                     print("Profile")
                 } else {
-                    print("Setting")
+                    viewModel.signOut()
                 }
             } label: {
                 MorphingSymbolView(

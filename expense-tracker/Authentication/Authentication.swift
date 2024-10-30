@@ -1,6 +1,6 @@
 //
 //  Authentication.swift
-// 
+//
 //
 //  Created by Krish Mittal on 04/04/24.
 //
@@ -25,21 +25,22 @@ enum AuthenticationError: Error {
     case tokenError(message: String)
 }
 
+@Observable
 @MainActor
-class Authentication: ObservableObject {
-    @Published var currentUserId = ""
-    @Published var user: ERUser? = nil
-    @Published var name: String  = ""
-    @Published var userType: String  = "Buyer"
-    @Published var email: String  = ""
-    @Published var phoneNumber: String  = "Not Provided"
-    @Published var address: String  = "Not Provided"
-    @Published var password: String  = ""
-    @Published var confirmPassword: String  = ""
-    @Published var authenticationState: AuthenticationState = .unauthenticated
-    @Published var isValid: Bool  = false
-    @Published var errorMessage: String? = ""
-    @Published var displayName = ""
+class Authentication {
+    var currentUserId = ""
+    var user: ERUser? = nil
+    var name: String  = ""
+    var userType: String  = "User"
+    var email: String  = ""
+    var phoneNumber: String  = "Not Provided"
+    var address: String  = "Not Provided"
+    var password: String  = ""
+    var confirmPassword: String  = ""
+    var authenticationState: AuthenticationState = .unauthenticated
+    var isValid: Bool  = false
+    var errorMessage: String? = ""
+    var displayName = ""
     private var handler: AuthStateDidChangeListenerHandle?
     private var currentNonce: String?
     var cancellables = Set<AnyCancellable>()
@@ -57,6 +58,7 @@ class Authentication: ObservableObject {
     public var isSignedIn: Bool{
         return Auth.auth().currentUser != nil
     }
+    
 }
 
 extension Authentication {
@@ -103,6 +105,7 @@ extension Authentication {
             let result = try await Auth.auth().signIn(withEmail: self.email, password: self.password)
             name = result.user.displayName ?? ""
             email = result.user.email ?? ""
+            UserDefaults().set(true, forKey: K.isLoggedIn)
             return true
         }
         catch  {
@@ -128,7 +131,7 @@ extension Authentication {
                 print("Error sending verification email: \(error.localizedDescription)")
             }
             insertUserRecord(id: currentUserId)
-            
+            UserDefaults().set(true, forKey: K.isSigningUp)
             return true
         }
         catch {
@@ -169,6 +172,7 @@ extension Authentication {
     func signOut() {
         do {
             try Auth.auth().signOut()
+            UserDefaults().set(false, forKey: K.isLoggedIn)
         }
         catch {
             print(error)
@@ -251,6 +255,7 @@ extension Authentication {
             name = firebaseUser.displayName ?? ""
             email = firebaseUser.email ?? ""
             insertUserRecord(id: currentUserId)
+            UserDefaults().set(true, forKey: K.isLoggedIn)
             return true
         }
         catch {
@@ -325,6 +330,7 @@ extension Authentication {
                         } else {
                             // New user, insert record
                             insertUserRecord(id: currentUserId)
+                            UserDefaults().set(true, forKey: K.isLoggedIn)
                         }
                     } catch {
                         print("Error authenticating: \(error.localizedDescription)")
@@ -334,7 +340,7 @@ extension Authentication {
             }
         }
     }
-
+    
     func updateDisplayName(for user: User, with appleIDCredential: ASAuthorizationAppleIDCredential, force: Bool = false) async {
         if let currentDisplayName = Auth.auth().currentUser?.displayName, !currentDisplayName.isEmpty {
             // Do nothing if display name already exists
@@ -350,8 +356,8 @@ extension Authentication {
             }
         }
     }
-
-
+    
+    
     func verifySignInWithAppleAuthenticationState() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let providerData = Auth.auth().currentUser?.providerData
