@@ -15,10 +15,10 @@ struct ERUserModelName {
     static let phoneNumber = "phoneNumber"
     static let address = "address"
     static let joined = "joined"
-    static let userFirestore = "users"
+    static let firestore = "users"
 }
 
-struct ERUser: Encodable, Hashable, Identifiable {
+struct ERUser: Codable, Hashable, Identifiable {
     let id: String
     let name: String?
     let email: String?

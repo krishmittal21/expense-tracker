@@ -21,3 +21,16 @@ extension Encodable {
         }
     }
 }
+
+extension Decodable {
+    static func asObject(from dict: [String: Any]) -> Self? {
+        do {
+            let data = try JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed)
+            let object = try JSONDecoder().decode(Self.self, from: data)
+            return object
+        } catch {
+            print("Failed to decode JSON to \(Self.self):", error)
+            return nil
+        }
+    }
+}
