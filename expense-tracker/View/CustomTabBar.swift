@@ -15,7 +15,8 @@ struct CustomTabBar: View {
     @State private var tabLocation: CGRect = .zero
     
     var body: some View {
-        let status = activeTab == .home || activeTab == .settings
+//        let status = activeTab == .home || activeTab == .settings
+        let status = activeTab == .home
 
         HStack(spacing: !status ? 0 : 12) {
             HStack(spacing: 0) {
@@ -81,7 +82,7 @@ struct CustomTabBar: View {
                 }
             } label: {
                 MorphingSymbolView(
-                    symbol: activeTab == .home ? "person.fill" : "slider.vertical.3",
+                    symbol: activeTab == .home ? "plus" : "slider.vertical.3",
                     config: .init(
                         font: .title,
                         frame: .init(width: 57, height: 57),
@@ -98,7 +99,7 @@ struct CustomTabBar: View {
             .offset(x: status ? 0 : -20)
             .padding(.leading, status ? 0 : -42)
         }
-        .padding(.bottom, 10) 
+        .padding(.bottom, 10)
         .animation(.smooth(duration: 0.3, extraBounce: 0), value: activeTab)
     }
 }
