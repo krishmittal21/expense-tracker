@@ -66,7 +66,7 @@ extension Authentication {
         
         let db = Firestore.firestore()
         
-        db.collection(ERUserModelName.userFirestore)
+        db.collection(ERUserModelName.firestore)
             .document(id)
             .setData(newUser.asDictionary())
     }
@@ -74,13 +74,13 @@ extension Authentication {
     func updateAddress(_ address: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let db = Firestore.firestore()
-        db.collection(ERUserModelName.userFirestore).document(userId).updateData([ "address": address ])
+        db.collection(ERUserModelName.firestore).document(userId).updateData([ "address": address ])
     }
     
     func updatePhoneNumber(_ phoneNumber: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let db = Firestore.firestore()
-        db.collection(ERUserModelName.userFirestore).document(userId).updateData([ "phoneNumber": phoneNumber ])
+        db.collection(ERUserModelName.firestore).document(userId).updateData([ "phoneNumber": phoneNumber ])
     }
 }
 
@@ -148,7 +148,7 @@ extension Authentication {
             return
         }
         let db = Firestore.firestore()
-        db.collection(ERUserModelName.userFirestore).document(userId).getDocument { [weak self] snapshot, error in
+        db.collection(ERUserModelName.firestore).document(userId).getDocument { [weak self] snapshot, error in
             guard let data = snapshot?.data(), error == nil else {
                 return
             }
@@ -237,7 +237,7 @@ extension Authentication {
             
             // Check if user exists in Firestore
             let db = Firestore.firestore()
-            let docRef = db.collection(ERUserModelName.userFirestore).document(currentUserId)
+            let docRef = db.collection(ERUserModelName.firestore).document(currentUserId)
             let docSnapshot = try await docRef.getDocument()
             
             if docSnapshot.exists {
@@ -313,7 +313,7 @@ extension Authentication {
                         
                         // Check if user exists in Firestore
                         let db = Firestore.firestore()
-                        let docRef = db.collection(ERUserModelName.userFirestore).document(currentUserId)
+                        let docRef = db.collection(ERUserModelName.firestore).document(currentUserId)
                         let docSnapshot = try await docRef.getDocument()
                         
                         if docSnapshot.exists {
