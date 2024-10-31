@@ -13,7 +13,7 @@ struct CustomTabBar: View {
     @Binding var activeTab: Tab
     @Namespace private var animation
     @State private var tabLocation: CGRect = .zero
-    @State private var viewModel = Authentication()
+    @State private var viewModel = AuthenticationViewModel()
     
     var body: some View {
         let status = activeTab == .home || activeTab == .settings

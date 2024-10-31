@@ -27,7 +27,7 @@ enum AuthenticationError: Error {
 
 @Observable
 @MainActor
-class Authentication {
+class AuthenticationViewModel {
     var currentUserId = ""
     var user: ERUser? = nil
     var name: String  = ""
@@ -61,7 +61,7 @@ class Authentication {
     
 }
 
-extension Authentication {
+extension AuthenticationViewModel {
     private func insertUserRecord(id: String) {
         let db = Firestore.firestore()
         
@@ -111,7 +111,7 @@ extension Authentication {
     }
 }
 
-extension Authentication {
+extension AuthenticationViewModel {
     func signInAnonymously() async -> Bool {
         do {
             let result = try await Auth.auth().signInAnonymously()
@@ -245,7 +245,7 @@ extension Authentication {
     }
 }
 
-extension Authentication {
+extension AuthenticationViewModel {
     func signInWithGoogle() async -> Bool {
         guard let clientID = FirebaseApp.app()?.options.clientID else {
             fatalError("No client ID found in Firebase Config")
@@ -296,7 +296,7 @@ extension Authentication {
 }
 
 
-extension Authentication {
+extension AuthenticationViewModel {
     func handleSignInWithAppleRequest(_ request: ASAuthorizationAppleIDRequest) {
         request.requestedScopes = [.fullName, .email]
         let nonce = randomNonceString()

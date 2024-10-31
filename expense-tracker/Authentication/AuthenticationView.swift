@@ -10,7 +10,7 @@ import AuthenticationServices
 
 struct AuthenticationView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State var viewModel = Authentication()
+    @State var viewModel = AuthenticationViewModel()
     @State var showLogin = false
     @State private var activeTab: Tab = .home
     @State private var isTabbarHidden: Bool = false
