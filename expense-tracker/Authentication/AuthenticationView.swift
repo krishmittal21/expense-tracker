@@ -32,29 +32,25 @@ struct AuthenticationView: View {
     
     var body: some View {
         ZStack {
+            LottieView(loopMode: .loop)
+                .scaleEffect(0.35)
             
-            VStack {
-                VStack(spacing: 10) {
-                    SignInWithAppleButton(.continue) { request in
-                        viewModel.handleSignInWithAppleRequest(request)
-                    } onCompletion: { result in
-                        viewModel.handleSignInWithAppleCompletion(result)
-                        
-                    }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 45)
-                    .cornerRadius(20)
-                    .signInWithAppleButtonStyle(.white)
-                    .shadow(color: colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                    
-                    AuthenticationButton(label: "Continue with Google", iconImage: Image("google")) { signInWithGoogle() }
-                                        
+            VStack(spacing: 10) {
+                SignInWithAppleButton(.continue) { request in
+                    viewModel.handleSignInWithAppleRequest(request)
+                } onCompletion: { result in
+                    viewModel.handleSignInWithAppleCompletion(result)
                 }
-                .padding(.top, 150)
+                .frame(maxWidth: .infinity)
+                .frame(height: 45)
+                .cornerRadius(20)
+                .signInWithAppleButtonStyle(.white)
+                .shadow(color: colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                 
-                Spacer()
+                AuthenticationButton(label: "Continue with Google", iconImage: Image("google")) { signInWithGoogle() }
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 20)
         }
     }
 }
