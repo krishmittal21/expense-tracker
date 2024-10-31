@@ -63,14 +63,39 @@ class Authentication {
 
 extension Authentication {
     private func insertUserRecord(id: String) {
-        
-        let newUser = ERUser(id: id, name: name, email: email, userType: userType,phoneNumber: phoneNumber, address: address, joined: Date().timeIntervalSince1970)
-        
         let db = Firestore.firestore()
         
-        db.collection(ERUserModelName.firestore)
-            .document(id)
-            .setData(newUser.asDictionary())
+        let userRef = db.collection(ERUserModelName.firestore).document(id)
+        
+        userRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error checking for user existence: \(error)")
+                return
+            }
+            
+            if let document = document, document.exists {
+                print("User with ID \(id) already exists. Skipping insertion.")
+            } else {
+                let newUser = ERUser(
+                    address: self.address,
+                    dateCreated: ISO8601DateFormatter().string(from: Date()),
+                    dateEdited: "",
+                    email: self.email,
+                    id: id,
+                    name: self.name,
+                    phoneNumber: self.phoneNumber,
+                    userType: "user"
+                )
+                
+                userRef.setData(newUser.asDictionary()) { error in
+                    if let error = error {
+                        print("Error inserting new user: \(error)")
+                    } else {
+                        print("New user with ID \(id) successfully inserted.")
+                    }
+                }
+            }
+        }
     }
     
     func updateAddress(_ address: String) {
@@ -156,15 +181,19 @@ extension Authentication {
                 return
             }
             DispatchQueue.main.async {
-                self?.user = ERUser(
-                    id: data[ERUserModelName.id] as? String ?? "",
-                    name: data[ERUserModelName.name] as? String ?? "",
-                    email: data[ERUserModelName.email] as? String ?? "",
-                    userType: data[ERUserModelName.userType] as? String ?? "",
-                    phoneNumber: data[ERUserModelName.phoneNumber] as? String ?? "",
-                    address: data[ERUserModelName.address] as? String ?? "",
-                    joined: data[ERUserModelName.joined] as? TimeInterval ?? 0
-                )
+                self?.user = ERUser.asObject(from: data)
+                /*
+                 (
+                     address: data[ERUserModelName.address] as? String ?? "",
+                     dateCreated: data[ERUserModelName.dateCreated] as? String ?? "",
+                     dateEdited: data[ERUserModelName.dateEdited] as? String ?? "",
+                     email: data[ERUserModelName.email] as? String ?? "",
+                     id: data[ERUserModelName.id] as? String ?? "",
+                     name: data[ERUserModelName.name] as? String ?? "",
+                     phoneNumber: data[ERUserModelName.phoneNumber] as? String ?? "",
+                     userType: data[ERUserModelName.userType] as? String ?? ""
+                 )
+                 */
             }
         }
     }
