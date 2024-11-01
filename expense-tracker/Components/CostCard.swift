@@ -51,7 +51,7 @@ struct CostCard: View {
                 .clipShape(Capsule())
         }
         .padding(16)
-        .padding(.vertical, 12)
+        .padding(.vertical, 8)
         .frame(width: 160, alignment: .leading)
         .background(backgroundColor.opacity(0.8))
         .cornerRadius(20)

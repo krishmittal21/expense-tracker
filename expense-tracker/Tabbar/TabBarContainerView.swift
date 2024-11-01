@@ -17,7 +17,7 @@ struct TabBarContainerView: View {
                 if #available(iOS 18, *) {
                     TabView(selection: $activeTab) {
                         SwiftUI.Tab.init(value: .home) {
-                            HomeView()
+                            DashboardView()
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
                         
@@ -28,7 +28,7 @@ struct TabBarContainerView: View {
                     }
                 } else {
                     TabView(selection: $activeTab) {
-                        HomeView()
+                        DashboardView()
                             .tag(Tab.home)
                             .background {
                                 if !isTabbarHidden {

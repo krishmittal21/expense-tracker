@@ -16,8 +16,8 @@ struct CustomTabBar: View {
     @State private var viewModel = AuthenticationViewModel()
     
     var body: some View {
-        let status = activeTab == .home || activeTab == .settings
-//        let status = activeTab == .home
+//        let status = activeTab == .home || activeTab == .settings
+        let status = activeTab == .home
 
         HStack(spacing: !status ? 0 : 12) {
             HStack(spacing: 0) {
