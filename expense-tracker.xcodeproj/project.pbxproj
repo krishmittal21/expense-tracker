@@ -6,13 +6,37 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CC1F03522CD2572700723C20 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CC1F03512CD2572700723C20 /* FirebaseAnalytics */; };
+		CC1F03542CD2572700723C20 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CC1F03532CD2572700723C20 /* FirebaseAuth */; };
+		CC1F03562CD2572700723C20 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CC1F03552CD2572700723C20 /* FirebaseDatabase */; };
+		CC1F03582CD2572700723C20 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CC1F03572CD2572700723C20 /* FirebaseFirestore */; };
+		CC1F035A2CD2572700723C20 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CC1F03592CD2572700723C20 /* FirebaseStorage */; };
+		CC1F036C2CD258B900723C20 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CC1F036B2CD258B900723C20 /* GoogleSignIn */; };
+		CC1F036E2CD258B900723C20 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CC1F036D2CD258B900723C20 /* GoogleSignInSwift */; };
+		CC624E902CD3A8EB00CD18F6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CC624E8F2CD3A8EB00CD18F6 /* Lottie */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		CC1F032E2CD20C2D00723C20 /* expense-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "expense-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CC1F035E2CD2576A00723C20 /* Exceptions for "expense-tracker" folder in "expense-tracker" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CC1F032D2CD20C2D00723C20 /* expense-tracker */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CC1F03302CD20C2D00723C20 /* expense-tracker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CC1F035E2CD2576A00723C20 /* Exceptions for "expense-tracker" folder in "expense-tracker" target */,
+			);
 			path = "expense-tracker";
 			sourceTree = "<group>";
 		};
@@ -23,6 +47,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC1F03562CD2572700723C20 /* FirebaseDatabase in Frameworks */,
+				CC1F03582CD2572700723C20 /* FirebaseFirestore in Frameworks */,
+				CC1F036E2CD258B900723C20 /* GoogleSignInSwift in Frameworks */,
+				CC1F03522CD2572700723C20 /* FirebaseAnalytics in Frameworks */,
+				CC1F035A2CD2572700723C20 /* FirebaseStorage in Frameworks */,
+				CC1F03542CD2572700723C20 /* FirebaseAuth in Frameworks */,
+				CC1F036C2CD258B900723C20 /* GoogleSignIn in Frameworks */,
+				CC624E902CD3A8EB00CD18F6 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +97,14 @@
 			);
 			name = "expense-tracker";
 			packageProductDependencies = (
+				CC1F03512CD2572700723C20 /* FirebaseAnalytics */,
+				CC1F03532CD2572700723C20 /* FirebaseAuth */,
+				CC1F03552CD2572700723C20 /* FirebaseDatabase */,
+				CC1F03572CD2572700723C20 /* FirebaseFirestore */,
+				CC1F03592CD2572700723C20 /* FirebaseStorage */,
+				CC1F036B2CD258B900723C20 /* GoogleSignIn */,
+				CC1F036D2CD258B900723C20 /* GoogleSignInSwift */,
+				CC624E8F2CD3A8EB00CD18F6 /* Lottie */,
 			);
 			productName = "expense-tracker";
 			productReference = CC1F032E2CD20C2D00723C20 /* expense-tracker.app */;
@@ -94,6 +134,11 @@
 			);
 			mainGroup = CC1F03252CD20C2D00723C20;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CC1F03502CD2572700723C20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CC1F036A2CD258B900723C20 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				CC624E8E2CD3A8EB00CD18F6 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CC1F032F2CD20C2D00723C20 /* Products */;
 			projectDirPath = "";
@@ -249,17 +294,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "expense-tracker/expense-tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"expense-tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 792SAN8W5Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "expense-tracker/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -279,17 +325,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "expense-tracker/expense-tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"expense-tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 792SAN8W5Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "expense-tracker/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -326,6 +373,76 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CC1F03502CD2572700723C20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.4.0;
+			};
+		};
+		CC1F036A2CD258B900723C20 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		CC624E8E2CD3A8EB00CD18F6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CC1F03512CD2572700723C20 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC1F03502CD2572700723C20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		CC1F03532CD2572700723C20 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC1F03502CD2572700723C20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CC1F03552CD2572700723C20 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC1F03502CD2572700723C20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		CC1F03572CD2572700723C20 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC1F03502CD2572700723C20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		CC1F03592CD2572700723C20 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC1F03502CD2572700723C20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		CC1F036B2CD258B900723C20 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC1F036A2CD258B900723C20 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		CC1F036D2CD258B900723C20 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC1F036A2CD258B900723C20 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		CC624E8F2CD3A8EB00CD18F6 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC624E8E2CD3A8EB00CD18F6 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CC1F03262CD20C2D00723C20 /* Project object */;
 }
