@@ -16,41 +16,90 @@ struct AuthenticationView: View {
     @State private var isTabbarHidden: Bool = false
     
     private func signInWithGoogle() {
+        viewModel.isLoading = true
+        print("Loading started:", viewModel.isLoading)
+        
         Task {
             await viewModel.signInWithGoogle()
-        }
-    }
-    
-    @ViewBuilder
-    private func displayContentView() -> some View {
-        if UserDefaults.standard.bool(forKey: K.isLoggedIn)  {
-            TabBarContainerView(activeTab: $activeTab, isTabbarHidden: $isTabbarHidden)
-        } else {
-            AuthenticationView()
+            viewModel.isLoading = false
+            print("Loading finished:", viewModel.isLoading)
         }
     }
     
     var body: some View {
         ZStack {
-            LottieView(loopMode: .loop)
-                .scaleEffect(0.35)
+            Color.customGreyColor.ignoresSafeArea()
             
-            VStack(spacing: 10) {
-                SignInWithAppleButton(.continue) { request in
-                    viewModel.handleSignInWithAppleRequest(request)
-                } onCompletion: { result in
-                    viewModel.handleSignInWithAppleCompletion(result)
-                }
-                .frame(maxWidth: .infinity)
-                .frame(height: 45)
-                .cornerRadius(20)
-                .signInWithAppleButtonStyle(.white)
-                .shadow(color: colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+            VStack {
+                Spacer()
                 
-                AuthenticationButton(label: "Continue with Google", iconImage: Image("google")) { signInWithGoogle() }
+                ZStack(alignment: .bottom) {
+                    RoundedRectangle(cornerRadius: 40)
+                        .foregroundColor(Color.customBlueColor)
+                        .frame(height: UIScreen.main.bounds.height * 0.55)
+                        .frame(width: UIScreen.main.bounds.width)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text("Save")
+                                .font(.system(size: 70, weight: .bold))
+                                .foregroundColor(.white)
+                            + Text("Smart")
+                                .font(.system(size: 70, weight: .regular))
+                                .foregroundColor(.white)
+                        }
+                        .padding(.leading, 15)
+                        
+                        Text("Empowering You with Smart Saving")
+                            .font(.system(size: 18))
+                            .foregroundColor(.gray)
+                            .padding(.leading, 15)
+                        
+                        Text("Strategies, Budgeting Insights,")
+                            .font(.system(size: 18))
+                            .foregroundColor(.gray)
+                            .padding(.top, 1)
+                            .padding(.leading, 15)
+                            .padding(.bottom, 50)
+                        
+                        Button(action:{
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                            signInWithGoogle()
+                        }) {
+                            HStack(spacing: 10) {
+                                Image("google")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                
+                                Text("Sign in with Google")
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .foregroundColor(.black)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(width: UIScreen.main.bounds.width - 32, height: 80)
+                            .background(Color.init(hex: "bc9cfa"))
+                            .cornerRadius(50)
+                            .padding(.horizontal, 16)
+                            
+                        }
+                    }
+                    .padding(.bottom, 50)
+                    
+                    LottieView(loopMode: .loop, animationName: "authAnimate")
+                        .scaleEffect(0.35)
+                        .offset(y: -70)
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 150)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 20)
+            
+            if viewModel.isLoading {
+                Color.black.opacity(0.5)
+                    .ignoresSafeArea()
+                
+                LottieView(loopMode: .loop, animationName: "progressAnimation")
+                    .scaleEffect(0.1)
+            }
         }
     }
 }

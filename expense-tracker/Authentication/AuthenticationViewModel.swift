@@ -44,7 +44,7 @@ class AuthenticationViewModel {
     private var handler: AuthStateDidChangeListenerHandle?
     private var currentNonce: String?
     var cancellables = Set<AnyCancellable>()
-    
+    var isLoading: Bool = false
     
     init(){
         self.handler = Auth.auth().addStateDidChangeListener { [weak self] _, user in
